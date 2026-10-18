@@ -11,6 +11,7 @@ find_package(SDL3 REQUIRED)
 set(PROG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/ps2/veronica/prog")
 set(PORT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/pc")
 file(GLOB JPN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/JPN/ps2/veronica/prog/*.c")
+file(GLOB STUBS "${CMAKE_CURRENT_SOURCE_DIR}/src/pc/stubs/*.c")
 
 ## Includes
 set(EE "${CMAKE_SOURCE_DIR}/include/recvx-decomp-ps2_sdk/usr/local/sce/ee/include")
@@ -25,10 +26,10 @@ set(PC_PORT_SDK "${CMAKE_SOURCE_DIR}/include/pc/gcc_ps2_sdk")
 set(THIRD_PARTY "${CMAKE_SOURCE_DIR}/deps")
 
 add_executable(recvx
-    # src/pc/afs.c
     # src/pc/tim2.c
+    ${STUBS}
     ${PORT_DIR}/main.c
-    ${PORT_DIR}/stubs.c
+    ${PORT_DIR}/afs.c
 
     ${PROG_DIR}/main.c
     ${PROG_DIR}/adv.c

@@ -19,12 +19,16 @@ void SetVolumeAdx2(unsigned int SlotNo, float Volume);
 void BupInit(void);
 void BupExit(void);
 
+// dread
+void bhReadPlayerData();
+void bhReadWeaponData();
+
 // effect.c
 void bhSetFontTexture(void *datp);
 
-// expand 
+// expand
 void Init_Expand();
-int Expand(register char* s, register unsigned char* d);
+int Expand(register char *s, register unsigned char *d);
 
 // sdc
 int GetSoundMode();
@@ -32,6 +36,7 @@ void SetSoundModeEx(int Mode, int Flag);
 void SetSoundMode(int Mode);
 
 // sdfunc
+int CheckTransEndSoundBank();
 void ExitApplication();
 void InitSofdecSystem(int Mode);
 void ExitSofdecSystem();
@@ -72,8 +77,8 @@ void njDrawPolygon(NJS_POLYGON_VTX *polygon, Int count, Int trans);
 
 // njplus
 void npPlusInit();
-void npSetMemory(unsigned char* memp, unsigned int size, char dat);
-void npSetMemoryL(unsigned int* memp, unsigned int size, int dat);
+void npSetMemory(unsigned char *memp, unsigned int size, char dat);
+void npSetMemoryL(unsigned int *memp, unsigned int size, int dat);
 
 // padman
 int CheckSoftResetKeyFlag(int ControllerId);
@@ -98,13 +103,13 @@ void njFogDisable();
 
 // ps2_NaMatrix.c
 void njInitMatrix(NJS_MATRIX *m, Sint32 n, Int flag);
-void    njGetMatrix(NJS_MATRIX *m);
+void njGetMatrix(NJS_MATRIX *m);
 
 // ps2_NaMem.c
 void njMemCopy4(void *dst, const void *src, Sint32 num);
 
 // ps2_NaTextureFunction.c
-void	njInitTextureBuffer(Sint8 *addr,Uint32 size);
+void njInitTextureBuffer(Sint8 *addr, Uint32 size);
 void njInitTexture(NJS_TEXMEMLIST *addr, Uint32 n);
 void njExitTexture(void);
 Sint32 njLoadTexture(NJS_TEXLIST *texlist);
@@ -121,22 +126,25 @@ void njSetTextureName(NJS_TEXNAME *texname, void *addr, Uint32 globalIndex,
                       Uint32 attr);
 
 // ps2_NaDebugFontFunction
-void 	njInitPrint(Uint32 *texture,Uint32 size,Uint32 attr);
-void 	njExitPrint(void);
-void	njPrintSize(Uint16 size);
+void njInitPrint(Uint32 *texture, Uint32 size, Uint32 attr);
+void njExitPrint(void);
+void njPrintSize(Uint16 size);
+void	njPrintColor(Uint32 c);
+void	njPrintC(Int loc,const char *s) ;
 
 // ps2_NaView
-void    njSetAspect(Float ax, Float ay);
-void    njInitView(NJS_VIEW *v);
-void    njSetView(NJS_VIEW *v);
-void    njClipZ(Float n, Float f);
+void njSetAspect(Float ax, Float ay);
+void njInitView(NJS_VIEW *v);
+void njSetView(NJS_VIEW *v);
+void njClipZ(Float n, Float f);
 
 // ps2_NaSystem
-void	njSetVertexBuffer(Uint32 *buffer,Sint32 size);
-void	njInitVertexBuffer( Sint32 op, Sint32 om, Sint32 tp, Sint32 tm ,Sint32 pt);
-void    njPolygonCullingMode( Int mode );
-void    njTextureShadingMode( Int mode );
-void	njSetBorderColor(Uint32 color );
+void njSetVertexBuffer(Uint32 *buffer, Sint32 size);
+void njInitVertexBuffer(Sint32 op, Sint32 om, Sint32 tp, Sint32 tm, Sint32 pt);
+void njPolygonCullingMode(Int mode);
+void njTextureShadingMode(Int mode);
+void njSetBorderColor(Uint32 color);
+void njWaitVSync(void);
 
 // ps2_NinjaCnk
 void njInit3D(NJS_VERTEX_BUF *vbuf, Int vn);
@@ -146,7 +154,6 @@ MEMORYCARDSTATE *CreateMemoryCard(MEMORYCARDSTATE *pCard);
 int CreateMemoryCardSubDirectory(MEMORYCARDSTATE *pCard);
 int CheckMcSelectPortInfoState(unsigned int ulPort);
 int GetMcSelectPortType(MEMORYCARDSTATE *pCard, unsigned int ulPort);
-
 
 // ps2_SystemLoadScreen.c
 SYSLOAD_SCREEN *CreateSysLoadScreen(SYSLOAD_SCREEN *pSysLoad,
@@ -163,6 +170,7 @@ SYSSAVE_SCREEN *CreateSysSaveScreen(SYSSAVE_SCREEN *pSysSave,
 // ps2_dummy
 int Ps2CheckTextureAlpha(void *pp);
 void PS2_jikken();
+void Ps2ClearOT();
 
 extern unsigned int Ps2_sys_cnt;
 
@@ -174,14 +182,13 @@ void *syMalloc(unsigned int nbytes);
 void pdSetMode(Sint32 mode);
 
 // ps2_sg_sybt
-Void   syBtExit     ( Void );
+Void syBtExit(Void);
 
 // ps2_sg_sycfg
 Sint32 syCfgSetSoundMode(Sint32 nMode);
 
 // ps2_sg_sycbl
-SYE_CBL syCblCheck( void );
-
+SYE_CBL syCblCheck(void);
 
 // ps2_texture.c
 void bhCopyMainmem2Texmem(NJS_TEXLIST *tlp);
@@ -199,6 +206,10 @@ extern const unsigned char FontSz[126];
 // sbinit
 void sbInitSystem(Int mode, Int frame, Int count);
 void sbExitSystem(void);
+
+// screen
+void bhSetScreenFade(unsigned int argb, float ct);
+void bhDrawScreenFade();
 
 // system.h
 int bhCalcVtxBuffer();

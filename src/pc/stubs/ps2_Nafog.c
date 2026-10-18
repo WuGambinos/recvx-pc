@@ -1,0 +1,2 @@
+void njFogEnable() {}
+void njFogDisable() {}

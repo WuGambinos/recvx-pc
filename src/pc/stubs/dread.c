@@ -1,0 +1,2 @@
+void bhReadPlayerData() {}
+void bhReadWeaponData() {}
